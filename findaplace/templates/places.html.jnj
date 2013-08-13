@@ -1,0 +1,95 @@
+<html>
+<head>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <title>Submit a new place - findaplace</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/submit.js" ></script>
+</head>
+<body>
+    <h1>Find a Place</h1>
+    <a id="submit_button" class="btn btn-info" href='/submit'> Submit A New Place </a>
+    <div id="message"> </div>
+    <form style="display:none;" id="new_place" action="/submit" method="post">
+        <fieldset>
+            <div class="form-group">
+                <label for="locationname">Location Name:</label>  
+                <input value="example" id="location_name" type="text" name="locationname">
+            </div>
+            <div class="form-group"> 
+                <label for="location">Neighborhood:</label>   
+                <input value="example" id="location" type="text" name="location">
+            </div>
+            <div class="form-group"> 
+                <label for="description">Description:</label>    
+                <input value="example" id="description" type="text" name="description">
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating:</label>      
+                <select id="rating" name="rating" class="form-control" style="width: 50px;">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="new">Have we been before?</label>      
+                <select id="been_before" name="new" class="form-control" style="width: 75px;">
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            </div>
+            <div class="form-group">  
+                <label for="date">Date Submitted:</label>    
+                <input id="date" type="date" name="date">
+            </div>
+            <div class="form-group">
+                <label for="username">Submitted by:</label>      
+                <input value="example" id="username" type="text" name="username">
+            </div>
+            <input class="btn btn-info" id="submit" type="submit" value="Submit">
+        </fieldset>
+    </form>
+    <form style="display:none;" id="new_place" action="/login" method="post">
+        <fieldset> 
+            <div class="form-group">
+                <label for="locationname">Location Name:</label>  
+                <input value="example" id="location_name" type="text" name="locationname">
+            </div>
+            <div class="form-group"> 
+                <label for="location">Neighborhood:</label>   
+                <input value="example" id="location" type="text" name="location">
+            </div>
+            <a id="submit_button" class="btn btn-info" href='/submit'>  Login </a>
+        </fieldset>
+    </form>
+    <table class="table table-striped" id="places_table">
+        <thead>
+            <th>Submitted by</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Description</th>
+            <th>Created at</th>
+            <th>Rating</th>
+            <th>New</th>
+        </thead>
+
+        <tbody>
+            {% for place in places %}
+            <tr>            
+                <td>{{ place.submitted_by}}</td>
+                <td>
+                    <a href='/place/{{place.name}}' >{{ place.name}}</a>
+                 </td>
+                <td>{{ place.location}}</td>
+                <td>{{ place.description}}</td>
+                <td>{{ place.created_at}}</td>
+                <td>{{ place.rating}}</td>
+                <td>{{ place.new}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
